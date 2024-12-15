@@ -1,0 +1,17 @@
+<launch>
+  <!-- Include the robot state publisher launch file -->
+  <include file="$(find robot)/launch/rsp.launch">
+    <arg name="use_sim_time" value="true" />
+  </include>
+
+  <!-- Launch Gazebo with a specific world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="use_sim_time" value="true" />
+    <arg name="world_name" value="$(find robot)/worlds/maze.world" />
+  </include>
+
+  <!-- Spawn the robot entity in Gazebo -->
+  <node name="spawn_entity" pkg="gazebo_ros" type="spawn_model" output="screen"
+      args="-param robot_description -urdf -model robot -x 0.50 -y 0.50 -z 0.23 -Y 1.57" />
+
+</launch>
